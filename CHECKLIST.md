@@ -31,7 +31,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Chain/auth/db/wallet/session/indexer libs
 - [x] Privy email auth + custodial wallet flow
 - [x] Server-relayed write API (abstracted transactions)
-- [ ] State/read API routes
+- [x] State/read API routes
 - [ ] Pages: Landing
 - [ ] Pages: Forge (craft creature + write moves)
 - [ ] Pages: Bestiary (the living meta)
