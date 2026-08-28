@@ -8,10 +8,10 @@ Living progress tracker. Each checked item is a commit.
 - [x] Root package.json + genlayer-js, network set to studionet, deployer verified (0xBC13…7f53, studionet reachable)
 
 ## Phase 1 — Intelligent Contracts
-- [ ] Bestiary.py (creatures + moves + natural-language forge via eq_principle)
-- [ ] Arena.py (deterministic battle sim + biome web oracle)
-- [ ] Tribunal.py (move-balance disputes + appeal jury)
-- [ ] genvm-lint check passes on all three
+- [x] Bestiary.py (creatures + moves + natural-language forge via eq_principle)
+- [x] Arena.py (deterministic battle sim + biome web oracle)
+- [x] Tribunal.py (move-balance disputes + appeal jury)
+- [x] genvm-lint check passes on all three
 
 ## Phase 2 — Contract tests
 - [ ] gl_runtime.py extended (web + eq_principle), conftest
