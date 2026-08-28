@@ -38,7 +38,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Pages: Arena (battle + watch the fight)
 - [x] Pages: Tribunal (disputes + watch the appeal)
 - [x] Pages: How to play (teaching)
-- [ ] Pages: My roster / account
+- [x] Pages: My roster / account
 - [ ] Lint + typecheck green
 
 ## Phase 5 — Finalize
