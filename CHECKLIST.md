@@ -36,7 +36,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Pages: Forge (craft creature + write moves)
 - [x] Pages: Bestiary (the living meta)
 - [x] Pages: Arena (battle + watch the fight)
-- [ ] Pages: Tribunal (disputes + watch the appeal)
+- [x] Pages: Tribunal (disputes + watch the appeal)
 - [ ] Pages: How to play (teaching)
 - [ ] Pages: My roster / account
 - [ ] Lint + typecheck green
