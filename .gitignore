@@ -1,0 +1,36 @@
+# Node / web
+node_modules/
+web/node_modules/
+.next/
+web/.next/
+out/
+web/out/
+*.tsbuildinfo
+web/next-env.d.ts
+
+# Env & secrets (never commit)
+.env
+.env.*
+!.env.example
+web/.env
+web/.env.*
+!web/.env.example
+deploy/.env
+*.keystore
+keystore.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.gltest_cache/
+
+# Build artifacts
+artifacts/
+deploy/addresses.local.json
+
+# OS / editor
+.DS_Store
+*.log
+.vercel/
