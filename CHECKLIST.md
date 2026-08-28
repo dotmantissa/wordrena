@@ -14,11 +14,11 @@ Living progress tracker. Each checked item is a commit.
 - [x] genvm-lint check passes on all three
 
 ## Phase 2 — Contract tests
-- [ ] gl_runtime.py extended (web + eq_principle), conftest
-- [ ] test_bestiary.py
-- [ ] test_arena.py
-- [ ] test_tribunal.py
-- [ ] Full suite green
+- [x] gl_runtime.py extended (web + eq_principle), conftest
+- [x] test_bestiary.py
+- [x] test_arena.py
+- [x] test_tribunal.py
+- [x] Full suite green (32 passing)
 
 ## Phase 3 — Deploy
 - [ ] deploy.mjs wires all three on studionet, writes addresses.json
