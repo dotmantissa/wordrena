@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/auth/AuthProvider";
+import { AppShell } from "@/components/layout/AppShell";
 import { currentUser } from "@/lib/session";
 import "./globals.css";
 
@@ -21,7 +22,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider initialUser={user}>{children}</AuthProvider>
+        <AuthProvider initialUser={user}>
+          <AppShell>{children}</AppShell>
+        </AuthProvider>
       </body>
     </html>
   );

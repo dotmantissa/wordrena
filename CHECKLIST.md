@@ -32,7 +32,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Privy email auth + custodial wallet flow
 - [x] Server-relayed write API (abstracted transactions)
 - [x] State/read API routes
-- [ ] Pages: Landing
+- [x] Pages: Landing
 - [ ] Pages: Forge (craft creature + write moves)
 - [ ] Pages: Bestiary (the living meta)
 - [ ] Pages: Arena (battle + watch the fight)
