@@ -1,3 +1,4 @@
+import { AuthButton } from "@/components/auth/AuthButton";
 import { Logo } from "@/components/brand/Logo";
 
 export default function Home() {
@@ -18,6 +19,9 @@ export default function Home() {
           The gates are opening. Try not to teach your first creature anything
           embarrassing.
         </p>
+        <div className="mt-7 flex justify-center">
+          <AuthButton />
+        </div>
       </section>
     </main>
   );

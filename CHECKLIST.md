@@ -29,7 +29,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Logo + brand + favicon
 - [x] Elemental creature art + biome scenes + battle animation system
 - [x] Chain/auth/db/wallet/session/indexer libs
-- [ ] Privy email auth + custodial wallet flow
+- [x] Privy email auth + custodial wallet flow
 - [ ] Server-relayed write API (abstracted transactions)
 - [ ] State/read API routes
 - [ ] Pages: Landing
