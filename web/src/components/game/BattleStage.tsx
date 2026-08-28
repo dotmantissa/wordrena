@@ -8,16 +8,15 @@ import { CreatureArt } from "./CreatureArt";
 import { BiomeScene } from "./BiomeScene";
 
 export type BattleLogEntry = {
-  turn?: number;
+  t?: number;
   actor?: string;
-  target?: string;
+  actor_name?: string;
   move?: string;
   kind?: string;
-  damage?: number;
-  heal?: number;
-  text?: string;
-  attacker_hp?: number;
-  defender_hp?: number;
+  dmg?: number;
+  note?: string;
+  actor_hp?: number;
+  target_hp?: number;
   [key: string]: unknown;
 };
 
@@ -39,13 +38,12 @@ export type BattleStageData = {
 };
 
 function entryText(entry: BattleLogEntry) {
-  if (entry.text) return entry.text;
-  const actor = String(entry.actor || "A creature");
+  if (entry.note) return entry.note;
+  const actor = String(entry.actor_name || "A creature");
   const move = entry.move ? ` uses ${entry.move}` : "";
   if (entry.kind === "miss") return `${actor}${move}, and misses. Awkward.`;
   if (entry.kind === "stun") return `${actor} loses the turn to a stun.`;
-  if (entry.kind === "heal") return `${actor}${move} and recovers ${entry.heal || 0} health.`;
-  if (entry.damage) return `${actor}${move} for ${entry.damage} damage.`;
+  if (entry.dmg) return `${actor}${move} for ${entry.dmg} damage.`;
   return `${actor}${move}.`;
 }
 
@@ -90,8 +88,16 @@ export function BattleStage({ battle }: { battle: BattleStageData }) {
     let defender = battle.defender.maxHp;
     for (let index = 0; index <= cursor; index += 1) {
       const item = battle.log[index];
-      if (typeof item?.attacker_hp === "number") attacker = item.attacker_hp;
-      if (typeof item?.defender_hp === "number") defender = item.defender_hp;
+      if (item?.actor === battle.attacker.id) {
+        if (typeof item.actor_hp === "number") attacker = item.actor_hp;
+        if (typeof item.target_hp === "number") defender = item.target_hp;
+      } else if (item?.actor === battle.defender.id) {
+        if (typeof item.actor_hp === "number") defender = item.actor_hp;
+        if (typeof item.target_hp === "number") attacker = item.target_hp;
+      } else if (item?.actor === "biome") {
+        if (typeof item.actor_hp === "number") attacker = item.actor_hp;
+        if (typeof item.target_hp === "number") defender = item.target_hp;
+      }
     }
     if (cursor === battle.log.length - 1) {
       attacker = battle.attackerHpLeft;
@@ -120,7 +126,7 @@ export function BattleStage({ battle }: { battle: BattleStageData }) {
       <BiomeScene {...battle.biome} className="min-h-[420px]">
         <div className="grid grid-cols-2 items-end gap-5 px-5 sm:px-10">
           <motion.div
-            animate={current?.actor === battle.attacker.name ? { x: [0, 18, 0] } : {}}
+            animate={current?.actor === battle.attacker.id ? { x: [0, 18, 0] } : {}}
             transition={{ duration: 0.42 }}
           >
             <CreatureArt
@@ -136,7 +142,7 @@ export function BattleStage({ battle }: { battle: BattleStageData }) {
             />
           </motion.div>
           <motion.div
-            animate={current?.actor === battle.defender.name ? { x: [0, -18, 0] } : {}}
+            animate={current?.actor === battle.defender.id ? { x: [0, -18, 0] } : {}}
             transition={{ duration: 0.42 }}
           >
             <CreatureArt
