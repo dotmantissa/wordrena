@@ -26,7 +26,7 @@ Living progress tracker. Each checked item is a commit.
 
 ## Phase 4 — Web app
 - [x] Next.js scaffold + config + design system (uniform theme)
-- [ ] Logo + brand + favicon
+- [x] Logo + brand + favicon
 - [ ] Elemental creature art + biome scenes + battle animation system
 - [ ] Chain/auth/db/wallet/session/indexer libs
 - [ ] Privy email auth + custodial wallet flow
