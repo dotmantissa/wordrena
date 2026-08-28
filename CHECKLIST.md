@@ -25,8 +25,9 @@ Living progress tracker. Each checked item is a commit.
 - [x] Smoke test against live contracts (green: craft, forge, duel, record all on chain)
 
 ## Phase 4 — Web app
-- [ ] Next.js scaffold + config + design system (uniform theme)
+- [x] Next.js scaffold + config + design system (uniform theme)
 - [ ] Logo + brand + favicon
+- [ ] Elemental creature art + biome scenes + battle animation system
 - [ ] Chain/auth/db/wallet/session/indexer libs
 - [ ] Privy email auth + custodial wallet flow
 - [ ] Server-relayed write API (abstracted transactions)
