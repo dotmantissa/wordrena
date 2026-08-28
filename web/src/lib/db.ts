@@ -205,3 +205,19 @@ export async function recentTransactions(userId: string, limit = 12) {
   );
   return result.rows.map(transaction);
 }
+
+export async function assertWriteRateLimit(userId: string) {
+  await ensureSchema();
+  const result = await pool().query(
+    `
+      SELECT COUNT(*)::int AS count
+      FROM transaction_log
+      WHERE user_id = $1
+        AND created_at > NOW() - INTERVAL '1 minute'
+    `,
+    [userId]
+  );
+  if (Number(result.rows[0]?.count || 0) >= 8) {
+    throw new Error("Give the validators a breath before sending another move");
+  }
+}

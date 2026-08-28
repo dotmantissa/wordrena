@@ -30,7 +30,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Elemental creature art + biome scenes + battle animation system
 - [x] Chain/auth/db/wallet/session/indexer libs
 - [x] Privy email auth + custodial wallet flow
-- [ ] Server-relayed write API (abstracted transactions)
+- [x] Server-relayed write API (abstracted transactions)
 - [ ] State/read API routes
 - [ ] Pages: Landing
 - [ ] Pages: Forge (craft creature + write moves)
