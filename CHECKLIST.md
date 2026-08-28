@@ -33,7 +33,7 @@ Living progress tracker. Each checked item is a commit.
 - [x] Server-relayed write API (abstracted transactions)
 - [x] State/read API routes
 - [x] Pages: Landing
-- [ ] Pages: Forge (craft creature + write moves)
+- [x] Pages: Forge (craft creature + write moves)
 - [ ] Pages: Bestiary (the living meta)
 - [ ] Pages: Arena (battle + watch the fight)
 - [ ] Pages: Tribunal (disputes + watch the appeal)
