@@ -21,8 +21,8 @@ Living progress tracker. Each checked item is a commit.
 - [x] Full suite green (32 passing)
 
 ## Phase 3 — Deploy
-- [ ] deploy.mjs wires all three on studionet, writes addresses.json
-- [ ] Smoke test against live contracts
+- [x] deploy.mjs wires all three on studionet, writes addresses.json
+- [x] Smoke test against live contracts (green: craft, forge, duel, record all on chain)
 
 ## Phase 4 — Web app
 - [ ] Next.js scaffold + config + design system (uniform theme)

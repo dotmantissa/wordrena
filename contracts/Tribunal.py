@@ -127,7 +127,7 @@ class Tribunal(gl.Contract):
         if len(claim) < 8 or len(claim) > 400:
             raise gl.vm.UserError("[EXPECTED] make your case in 8 to 400 characters")
 
-        move = gl.contract.get_at(self.bestiary).view().get_move(move_id)
+        move = gl.get_contract_at(self.bestiary).view().get_move(move_id)
         if not move.get("exists"):
             raise gl.vm.UserError("[EXPECTED] unknown move")
         if move.get("status") == "retired":
@@ -198,7 +198,7 @@ class Tribunal(gl.Contract):
             d.new_mana = u256(verdict["new_mana"])
             d.new_cooldown = u256(verdict["new_cooldown"])
             d.new_budget = u256(verdict["new_budget"])
-            gl.contract.get_at(self.bestiary).emit(on="finalized").apply_rebalance(
+            gl.get_contract_at(self.bestiary).emit(on="finalized").apply_rebalance(
                 d.move_id,
                 u256(verdict["new_power"]),
                 u256(verdict["new_mana"]),
@@ -207,7 +207,7 @@ class Tribunal(gl.Contract):
                 verdict["summary"],
             )
             if int(d.bond) > 0:
-                gl.contract.get_at(d.challenger).emit_transfer(
+                gl.get_contract_at(d.challenger).emit_transfer(
                     value=u256(int(d.bond)), on="finalized"
                 )
         else:
@@ -236,7 +236,7 @@ class Tribunal(gl.Contract):
         if amount <= 0:
             raise gl.vm.UserError("[EXPECTED] the treasury is empty")
         self.treasury = u256(0)
-        gl.contract.get_at(to).emit_transfer(value=u256(amount), on="finalized")
+        gl.get_contract_at(to).emit_transfer(value=u256(amount), on="finalized")
 
     # ---------- views ----------
 

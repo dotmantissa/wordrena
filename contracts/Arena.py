@@ -247,7 +247,7 @@ class Arena(gl.Contract):
         if biome_key not in self.biomes:
             raise gl.vm.UserError("[EXPECTED] unknown biome")
 
-        book = gl.contract.get_at(self.bestiary)
+        book = gl.get_contract_at(self.bestiary)
         att = book.view().get_creature(attacker_id)
         dfn = book.view().get_creature(defender_id)
         if not att.get("exists"):

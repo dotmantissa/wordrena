@@ -1,0 +1,10 @@
+{
+  "bestiary": "0x2d64Bd962eF1c054832A9e6d2A0aB66a81939721",
+  "arena": "0x662785f39fC2041B5C10E222ce4030e8FD5fdB88",
+  "tribunal": "0xDff14cf70b9A332Eee8B34236E518Dd9F1a49Bf4",
+  "network": "studionet",
+  "chainId": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "deployer": "0xBC1399c55538eC034d4Da550C03c34Ae0C357f53",
+  "deployed_at": "2026-08-28T13:29:55.508Z"
+}
