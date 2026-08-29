@@ -16,14 +16,34 @@ type CalldataValue =
   | { [key: string]: CalldataValue };
 
 let transportPrepared = false;
+let sharedPublicClient: Awaited<ReturnType<typeof createPublicClient>> | null =
+  null;
 
 function prepareNodeTransport() {
   if (transportPrepared) return;
   transportPrepared = true;
 
-  dns.setDefaultResultOrder("ipv4first");
+  const originalLookup = dns.lookup.bind(dns);
+  dns.lookup = ((hostname: string, options: unknown, callback: unknown) => {
+    if (typeof options === "function") {
+      return originalLookup(hostname, { family: 4 }, options as never);
+    }
+    return originalLookup(
+      hostname,
+      { ...(options as object), family: 4 },
+      callback as never
+    );
+  }) as never;
   https.globalAgent = new https.Agent({ keepAlive: false, timeout: 60_000 });
   http.globalAgent = new http.Agent({ keepAlive: false, timeout: 60_000 });
+
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (input, init) => {
+    const signal =
+      init?.signal ??
+      AbortSignal.timeout(Number(process.env.STUDIO_FETCH_TIMEOUT_MS || 12_000));
+    return originalFetch(input, { ...init, signal });
+  };
 }
 
 async function sdk() {
@@ -50,9 +70,16 @@ async function encodedArgs(args: CalldataValue[]) {
   return args.map(encode);
 }
 
-export async function publicClient() {
+async function createPublicClient() {
   const { createClient, chains } = await sdk();
   return createClient({ chain: chains.studionet, endpoint: env.studioRpc });
+}
+
+export async function publicClient() {
+  if (!sharedPublicClient) {
+    sharedPublicClient = await createPublicClient();
+  }
+  return sharedPublicClient;
 }
 
 export async function walletClient(privateKey: string) {
