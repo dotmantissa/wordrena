@@ -5,6 +5,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
   agentRules: false,
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
   outputFileTracingRoot: path.join(__dirname, ".."),
   webpack: (config) => {
     // Privy drags in optional Solana and Farcaster bits we never touch.

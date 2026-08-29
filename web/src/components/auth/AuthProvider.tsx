@@ -8,7 +8,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
+import {
+  PrivyProvider,
+  usePrivy,
+} from "@privy-io/react-auth";
 import type { SessionUser } from "@/lib/session";
 
 type AuthContextValue = {
@@ -33,7 +36,6 @@ function SessionBridge({
   const {
     ready: privyReady,
     authenticated: privyAuthenticated,
-    login,
     logout: privyLogout,
     getAccessToken,
   } = usePrivy();
@@ -95,14 +97,18 @@ function SessionBridge({
       authenticated: Boolean(user),
       syncing,
       user,
-      login,
+      login: () => undefined,
       logout,
       refreshSession,
     }),
-    [login, logout, privyReady, refreshSession, syncing, user]
+    [logout, privyReady, refreshSession, syncing, user]
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function AuthProvider({
@@ -120,11 +126,6 @@ export function AuthProvider({
       appId={appId}
       config={{
         loginMethods: ["email"],
-        embeddedWallets: {
-          ethereum: { createOnLogin: "off" },
-          solana: { createOnLogin: "off" },
-          showWalletUIs: false,
-        },
         appearance: {
           theme: "dark",
           accentColor: "#ffb638",
