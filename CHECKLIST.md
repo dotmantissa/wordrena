@@ -44,4 +44,4 @@ Living progress tracker. Each checked item is a commit.
 
 ## Phase 5 — Finalize
 - [x] Human-written README (no AI artifacts, no stray hyphens)
-- [ ] Push to GitHub
+- [x] Push to GitHub
