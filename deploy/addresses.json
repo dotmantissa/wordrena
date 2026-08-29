@@ -1,10 +1,10 @@
 {
-  "bestiary": "0x2d64Bd962eF1c054832A9e6d2A0aB66a81939721",
-  "arena": "0x662785f39fC2041B5C10E222ce4030e8FD5fdB88",
-  "tribunal": "0xDff14cf70b9A332Eee8B34236E518Dd9F1a49Bf4",
+  "bestiary": "0x84a3ebDb929f67C7b6591f4cCb2a5196d78122b6",
+  "arena": "0xFbF0E1c0ba62867bd34A9bC9f234FB5ACd4fF2d3",
+  "tribunal": "0x54447aFfD8A613c728aA837a0506Ab2418a4dED7",
   "network": "studionet",
   "chainId": 61999,
   "rpc": "https://studio.genlayer.com/api",
   "deployer": "0xBC1399c55538eC034d4Da550C03c34Ae0C357f53",
-  "deployed_at": "2026-08-28T13:29:55.508Z"
+  "deployed_at": "2026-08-29T13:51:55.230Z"
 }
