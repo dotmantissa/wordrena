@@ -124,17 +124,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </header>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 0, y: 7 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          transition={{ duration: 0.22 }}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      <motion.div
+        key={pathname}
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.22 }}
+      >
+        {children}
+      </motion.div>
 
       <footer className="border-t border-line px-4 py-8 text-center text-xs text-ink-faint">
         Every creature, move, fight, and appeal above is read from GenLayer

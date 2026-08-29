@@ -13,13 +13,20 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function BestiaryPage() {
-  const [creaturePage, movePage] = await Promise.all([
-    readContract<PageResult<Creature>>(contracts.bestiary, "list_creatures", [
-      0,
-      100,
-    ]),
-    readContract<PageResult<Move>>(contracts.bestiary, "list_moves", [0, 100]),
-  ]);
+  let creaturePage: PageResult<Creature> = { total: 0, items: [] };
+  let movePage: PageResult<Move> = { total: 0, items: [] };
+  let readFailed = false;
+  try {
+    [creaturePage, movePage] = await Promise.all([
+      readContract<PageResult<Creature>>(contracts.bestiary, "list_creatures", [
+        0,
+        100,
+      ]),
+      readContract<PageResult<Move>>(contracts.bestiary, "list_moves", [0, 100]),
+    ]);
+  } catch {
+    readFailed = true;
+  }
   const averagePower = movePage.items.length
     ? Math.round(
         movePage.items.reduce((total, move) => total + move.power, 0) /
@@ -57,6 +64,12 @@ export default async function BestiaryPage() {
           ))}
         </div>
       </header>
+      {readFailed ? (
+        <p className="mt-7 rounded-md border border-gold/25 bg-gold/5 p-4 text-sm text-gold-soft">
+          StudioNet is slow right now. The Bestiary will refill on your next
+          refresh.
+        </p>
+      ) : null}
       <div className="mt-9">
         <BestiaryBrowser
           creatures={creaturePage.items}

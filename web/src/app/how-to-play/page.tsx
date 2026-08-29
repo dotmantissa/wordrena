@@ -87,7 +87,12 @@ const steps: Array<{
 ];
 
 export default async function HowToPlayPage() {
-  const biomes = await readContract<Biome[]>(contracts.arena, "list_biomes");
+  let biomes: Biome[] = [];
+  try {
+    biomes = await readContract<Biome[]>(contracts.arena, "list_biomes");
+  } catch {
+    biomes = [];
+  }
   const liveBiome = biomes.find((biome) => biome.source === "open-meteo") ?? biomes[0];
 
   return (

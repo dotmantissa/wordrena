@@ -16,7 +16,7 @@ function WeatherMark({
       ? CloudRain
       : Sun;
   return (
-    <div className="absolute right-4 top-4 flex items-center gap-2 rounded-md border border-white/15 bg-void/70 px-3 py-2 text-xs text-parch backdrop-blur">
+    <div className="absolute right-4 top-4 z-10 flex items-center gap-2 rounded-md border border-white/15 bg-void/70 px-3 py-2 text-xs text-parch backdrop-blur">
       <Icon className="size-4" aria-hidden />
       <span>Hazard {hazard}</span>
     </div>
@@ -85,7 +85,7 @@ export function BiomeScene({
           : null}
       </svg>
       <div className="absolute inset-x-0 bottom-0 h-24 bg-dusk/35" />
-      <div className="absolute left-4 top-4 max-w-[65%]">
+      <div className="absolute left-4 top-4 z-10 max-w-[65%]">
         <p className="font-mono text-[11px] uppercase" style={{ color: soft }}>
           {homeElement} floor · {buffPct}% force
         </p>

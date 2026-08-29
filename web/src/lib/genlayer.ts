@@ -71,13 +71,24 @@ export async function readContract<T>(
   functionName: string,
   args: CalldataValue[] = []
 ): Promise<T> {
-  const client = await publicClient();
-  return (await client.readContract({
-    address: contract,
-    functionName,
-    args: (await encodedArgs(args)) as never,
-    jsonSafeReturn: true,
-  })) as T;
+  let lastError: unknown;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const client = await publicClient();
+      return (await client.readContract({
+        address: contract,
+        functionName,
+        args: (await encodedArgs(args)) as never,
+        jsonSafeReturn: true,
+      })) as T;
+    } catch (error) {
+      lastError = error;
+      if (attempt < 2) {
+        await new Promise((resolve) => setTimeout(resolve, 700 * (attempt + 1)));
+      }
+    }
+  }
+  throw lastError;
 }
 
 export async function submitWrite({

@@ -13,14 +13,22 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function ArenaPage() {
-  const [creatures, battles, biomes] = await Promise.all([
-    readContract<PageResult<Creature>>(contracts.bestiary, "list_creatures", [
-      0,
-      100,
-    ]),
-    readContract<PageResult<Battle>>(contracts.arena, "list_battles", [0, 40]),
-    readContract<Biome[]>(contracts.arena, "list_biomes"),
-  ]);
+  let creatures: PageResult<Creature> = { total: 0, items: [] };
+  let battles: PageResult<Battle> = { total: 0, items: [] };
+  let biomes: Biome[] = [];
+  let readFailed = false;
+  try {
+    [creatures, battles, biomes] = await Promise.all([
+      readContract<PageResult<Creature>>(contracts.bestiary, "list_creatures", [
+        0,
+        100,
+      ]),
+      readContract<PageResult<Battle>>(contracts.arena, "list_battles", [0, 40]),
+      readContract<Biome[]>(contracts.arena, "list_biomes"),
+    ]);
+  } catch {
+    readFailed = true;
+  }
 
   return (
     <main className="mx-auto max-w-[1480px] px-4 py-10 sm:px-6 lg:py-14">
@@ -35,6 +43,12 @@ export default async function ArenaPage() {
           the receipts.
         </p>
       </header>
+      {readFailed ? (
+        <p className="mt-7 rounded-md border border-gold/25 bg-gold/5 p-4 text-sm text-gold-soft">
+          StudioNet missed the first bell. Refresh in a moment and the fighters
+          and biomes will return.
+        </p>
+      ) : null}
       <div className="mt-10">
         <ArenaLobby
           creatures={creatures.items}

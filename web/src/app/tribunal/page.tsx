@@ -18,19 +18,27 @@ export default async function TribunalPage({
   searchParams: Promise<{ move?: string }>;
 }) {
   const query = await searchParams;
-  const [moves, disputes, stats] = await Promise.all([
-    readContract<PageResult<Move>>(contracts.bestiary, "list_moves", [0, 100]),
-    readContract<PageResult<Dispute>>(contracts.tribunal, "list_disputes", [
-      0,
-      60,
-    ]),
-    readContract<{
-      total: number;
-      upheld: number;
-      rejected: number;
-      pending: number;
-    }>(contracts.tribunal, "tribunal_stats"),
-  ]);
+  let moves: PageResult<Move> = { total: 0, items: [] };
+  let disputes: PageResult<Dispute> = { total: 0, items: [] };
+  let stats = { total: 0, upheld: 0, rejected: 0, pending: 0 };
+  let readFailed = false;
+  try {
+    [moves, disputes, stats] = await Promise.all([
+      readContract<PageResult<Move>>(contracts.bestiary, "list_moves", [0, 100]),
+      readContract<PageResult<Dispute>>(contracts.tribunal, "list_disputes", [
+        0,
+        60,
+      ]),
+      readContract<{
+        total: number;
+        upheld: number;
+        rejected: number;
+        pending: number;
+      }>(contracts.tribunal, "tribunal_stats"),
+    ]);
+  } catch {
+    readFailed = true;
+  }
 
   return (
     <main className="mx-auto max-w-[1380px] px-4 py-10 sm:px-6 lg:py-14">
@@ -59,6 +67,12 @@ export default async function TribunalPage({
           ))}
         </div>
       </header>
+      {readFailed ? (
+        <p className="mt-7 rounded-md border border-gold/25 bg-gold/5 p-4 text-sm text-gold-soft">
+          The docket could not be read just now. No verdicts were lost; the
+          chain only needs another moment.
+        </p>
+      ) : null}
       <div className="mt-10">
         <TribunalDesk
           moves={[...moves.items].reverse()}
