@@ -165,5 +165,8 @@ export function friendlyContractError(error: unknown) {
   if (raw.includes("did not finalize")) {
     return "StudioNet is taking longer than usual. Check your roster in a moment";
   }
+  if (raw.includes("eth_fillTransaction")) {
+    return "The sponsor wallet could not fund this action on StudioNet";
+  }
   return raw.length <= 240 ? raw : "The chain rejected that action";
 }

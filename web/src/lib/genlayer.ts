@@ -206,11 +206,19 @@ export async function ensureWalletFunding(address: Address) {
     throw new Error("The player wallet needs GEN and DEPLOYER_KEY is not configured");
   }
   const { client: operator, account } = await walletClient(env.deployerKey);
-  const hash = await operator.sendTransaction({
+  const nonce = await operator.getCurrentNonce({ address: account.address });
+  const gasPrice = await operator.request({ method: "eth_gasPrice" });
+  const serializedTransaction = await account.signTransaction({
     account,
     to: address,
+    type: "legacy",
+    nonce: Number(nonce),
     value: 500_000_000_000_000_000n,
+    gas: 21_000n,
+    gasPrice: BigInt(gasPrice),
+    chainId: env.chainId,
   });
+  const hash = await operator.sendRawTransaction({ serializedTransaction });
   await waitForFinality(hash as `0x${string}`, 120);
   return hash;
 }

@@ -203,13 +203,18 @@ export function ArenaLobby({
               buffPct={biome.buff_pct}
               hazard={biome.hazard}
               source={biome.source}
+              selected={biomeKey === biome.key}
+              onSelect={() => setBiomeKey(biome.key)}
               className="min-h-60"
             >
               <div className="flex justify-end px-3">
                 <Button
                   variant="secondary"
                   className="min-h-8 bg-void/80 px-3 py-1 text-xs"
-                  onClick={() => void refreshBiome(biome.key)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    void refreshBiome(biome.key);
+                  }}
                   disabled={!authenticated || Boolean(refreshing)}
                   title="Ask the validators for a fresh weather reading"
                 >

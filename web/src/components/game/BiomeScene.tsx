@@ -32,6 +32,8 @@ export function BiomeScene({
   source,
   className,
   children,
+  selected = false,
+  onSelect,
 }: {
   name: string;
   homeElement: string;
@@ -41,6 +43,8 @@ export function BiomeScene({
   source: string;
   className?: string;
   children?: React.ReactNode;
+  selected?: boolean;
+  onSelect?: () => void;
 }) {
   const element = asElement(homeElement);
   const tone = elementTone[element];
@@ -50,8 +54,26 @@ export function BiomeScene({
     <section
       className={clsx(
         "field-frame relative isolate min-h-72 overflow-hidden",
+        onSelect &&
+          "cursor-pointer transition-[box-shadow,border-color] hover:border-gold/80",
+        selected && "border-gold shadow-[0_0_0_3px_rgba(184,95,50,0.24)]",
         className
       )}
+      role={onSelect ? "button" : undefined}
+      tabIndex={onSelect ? 0 : undefined}
+      aria-pressed={onSelect ? selected : undefined}
+      aria-label={onSelect ? `Select ${name} biome` : undefined}
+      onClick={onSelect}
+      onKeyDown={
+        onSelect
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onSelect();
+              }
+            }
+          : undefined
+      }
       style={{ color: tone }}
     >
       <svg
