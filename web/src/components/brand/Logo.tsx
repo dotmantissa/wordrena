@@ -1,11 +1,6 @@
 import { useId } from "react";
 import clsx from "clsx";
 
-/*
-  The mark is a little sigil: a bold W drawn like a row of fangs (the creature,
-  the arena crown) with a spark hovering over it (the word you write, catching
-  fire). Gold melting into rune violet, the two brand colours.
-*/
 export function LogoMark({
   className,
   animated = false,
@@ -14,8 +9,6 @@ export function LogoMark({
   animated?: boolean;
 }) {
   const uid = useId().replaceAll(":", "");
-  const tileId = `${uid}-tile`;
-  const strokeId = `${uid}-stroke`;
   const clipId = `${uid}-clip`;
 
   return (
@@ -25,57 +18,43 @@ export function LogoMark({
       aria-hidden
     >
       <defs>
-        <linearGradient id={tileId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#ff6a45" stopOpacity="0.16" />
-          <stop offset="50%" stopColor="#b77bff" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="#38a8ff" stopOpacity="0.16" />
-        </linearGradient>
-        <linearGradient id={strokeId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#ffcb52" />
-          <stop offset="55%" stopColor="#ffb638" />
-          <stop offset="100%" stopColor="#b77bff" />
-        </linearGradient>
         <clipPath id={clipId}>
-          <rect x="0" y="0" width="48" height="48" rx="12" />
+          <rect x="0" y="0" width="48" height="48" rx="4" />
         </clipPath>
       </defs>
 
       <g clipPath={`url(#${clipId})`}>
-        <rect width="48" height="48" fill={`url(#${tileId})`} />
-        <rect width="48" height="48" fill="#14121f" opacity="0.55" />
+        <rect width="48" height="48" fill="#30463c" />
+        <path d="M0 35 12 24l8 7 10-13 18 14v16H0Z" fill="#405b4c" />
 
-        {/* the spark of the written word */}
         <g
           style={
             animated
-              ? { transformOrigin: "24px 12px", animation: "flicker 3.5s ease-in-out infinite" }
+              ? { transformOrigin: "24px 11px", animation: "pulse-dot 2.2s ease-in-out infinite" }
               : undefined
           }
         >
-          <circle cx="24" cy="12.5" r="3" fill="#ffd07a" />
-          <circle cx="24" cy="12.5" r="6.5" fill="#ffb638" opacity="0.22" />
+          <circle cx="24" cy="11" r="3" fill="#f3c16c" />
+          <circle cx="24" cy="11" r="6" fill="#f3c16c" opacity="0.18" />
         </g>
 
-        {/* the fang crown / W */}
         <polyline
-          points="10,17 18,35 24,24 30,35 38,17"
+          points="9,18 17,35 24,25 31,35 39,18"
           fill="none"
-          stroke={`url(#${strokeId})`}
-          strokeWidth="4.4"
+          stroke="#fffaf0"
+          strokeWidth="4"
           strokeLinejoin="round"
           strokeLinecap="round"
         />
 
-        {/* arena floor */}
         <line
-          x1="12"
-          y1="40"
-          x2="36"
-          y2="40"
-          stroke="#38a8ff"
+          x1="11"
+          y1="41"
+          x2="37"
+          y2="41"
+          stroke="#d37d4e"
           strokeWidth="2"
           strokeLinecap="round"
-          opacity="0.75"
         />
       </g>
     </svg>
@@ -85,7 +64,7 @@ export function LogoMark({
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={clsx("font-display font-bold tracking-tight", className)}>
-      Word<span className="text-gradient">rena</span>
+      Word<span className="text-gold">rena</span>
     </span>
   );
 }

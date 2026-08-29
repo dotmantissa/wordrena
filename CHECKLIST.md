@@ -26,6 +26,7 @@ Living progress tracker. Each checked item is a commit.
 
 ## Phase 4 — Web app
 - [x] Next.js scaffold + config + design system (uniform theme)
+- [x] Original field journal visual direction across the app shell and landing page
 - [x] Logo + brand + favicon
 - [x] Elemental creature art + biome scenes + battle animation system
 - [x] Chain/auth/db/wallet/session/indexer libs
@@ -39,8 +40,8 @@ Living progress tracker. Each checked item is a commit.
 - [x] Pages: Tribunal (disputes + watch the appeal)
 - [x] Pages: How to play (teaching)
 - [x] Pages: My roster / account
-- [ ] Lint + typecheck green
+- [x] Lint + typecheck green
 
 ## Phase 5 — Finalize
-- [ ] Human-written README (no AI artifacts, no stray hyphens)
+- [x] Human-written README (no AI artifacts, no stray hyphens)
 - [ ] Push to GitHub

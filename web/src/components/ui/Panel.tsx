@@ -5,5 +5,5 @@ export function Panel({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={clsx("card", className)} {...props} />;
+  return <div className={clsx("card p-5", className)} {...props} />;
 }

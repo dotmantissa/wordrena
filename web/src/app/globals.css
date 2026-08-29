@@ -1,44 +1,32 @@
 @import "tailwindcss";
 
-/*
-  Wordrena runs in one mode on purpose: a twilight arena at dusk, warm
-  parchment ink for text, and six elemental colours that carry real meaning
-  across the whole app. No light or dark toggle. This is the world.
-*/
-
 @theme {
-  --font-display: "Ubuntu", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Ubuntu", Arial, ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Ubuntu Mono", "Liberation Mono", ui-monospace, monospace;
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "DM Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "Liberation Mono", ui-monospace, monospace;
 
-  /* twilight surfaces */
-  --color-void: #100e19;
-  --color-dusk: #14121f;
-  --color-dusk-raise: #1c1930;
-  --color-dusk-high: #26223c;
+  --color-void: #27352f;
+  --color-dusk: #30463c;
+  --color-dusk-raise: #405b4c;
+  --color-dusk-high: #577260;
 
-  /* brand: torch gold + arcane rune violet */
-  --color-gold: #ffb638;
-  --color-gold-soft: #ffd07a;
-  --color-rune: #b77bff;
+  --color-gold: #b85f32;
+  --color-gold-soft: #d37d4e;
+  --color-rune: #64754d;
 
-  /* the six elements, load bearing everywhere */
-  --color-ember: #ff6a45;
-  --color-tide: #38a8ff;
-  --color-gale: #35e0c0;
-  --color-terra: #8ccb57;
-  --color-umbra: #9b6bff;
-  --color-lumen: #ffcb52;
+  --color-ember: #c95736;
+  --color-tide: #357d91;
+  --color-gale: #4c8b72;
+  --color-terra: #7b8145;
+  --color-umbra: #765a75;
+  --color-lumen: #b8883e;
 
-  /* parchment inks */
-  --color-parch: #f4f0e6;
-  --color-parch-dim: #cfc9dd;
+  --color-parch: #2c302a;
+  --color-parch-dim: #e7dcc9;
 
   --animate-floaty: floaty 7s ease-in-out infinite;
   --animate-pulse-dot: pulse-dot 2.2s ease-in-out infinite;
-  --animate-flicker: flicker 3.5s ease-in-out infinite;
   --animate-rise: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-sheen: sheen 8s ease-in-out infinite;
 
   @keyframes floaty {
     0%, 100% { transform: translateY(0); }
@@ -48,31 +36,22 @@
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.55); opacity: 0.5; }
   }
-  @keyframes flicker {
-    0%, 100% { opacity: 0.9; }
-    45% { opacity: 1; }
-    55% { opacity: 0.72; }
-  }
   @keyframes rise {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  @keyframes sheen {
-    0%, 100% { transform: translateX(-30%) rotate(8deg); opacity: 0.5; }
-    50% { transform: translateX(30%) rotate(8deg); opacity: 0.9; }
-  }
 }
 
 :root {
-  --bg: #14121f;
-  --surface: #1c1930;
-  --surface-2: #26223c;
-  --ink: #f4f0e6;
-  --ink-soft: #b0a8c4;
-  --ink-faint: #7a7391;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.16);
-  --shadow-color: 258 55% 3%;
+  --bg: #f3ede2;
+  --surface: #fffaf0;
+  --surface-2: #e9dfcf;
+  --ink: #2c302a;
+  --ink-soft: #66675c;
+  --ink-faint: #928c7e;
+  --line: rgba(54, 55, 43, 0.16);
+  --line-strong: rgba(54, 55, 43, 0.32);
+  --shadow-color: 42 28% 22%;
 }
 
 @theme inline {
@@ -99,27 +78,25 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-gold) 35%, transparent);
-  color: #fff;
+  background: color-mix(in srgb, var(--color-gold) 28%, transparent);
+  color: var(--ink);
 }
 
 input, textarea, select {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-/* faint hex arena grid, fades toward the edges */
 .arena-grid {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, black 25%, transparent 80%);
+  background-image: radial-gradient(rgba(48, 70, 60, 0.13) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 3px;
+  box-shadow: 0 12px 28px -24px hsl(var(--shadow-color) / 0.7);
 }
 
 .card-hover {
@@ -127,20 +104,17 @@ input, textarea, select {
     border-color 0.28s ease, box-shadow 0.28s ease;
 }
 .card-hover:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--line-strong);
-  box-shadow: 0 22px 48px -22px hsl(var(--shadow-color) / 0.7);
+  box-shadow: 0 20px 35px -22px hsl(var(--shadow-color) / 0.75);
 }
 
 .text-gradient {
-  background: linear-gradient(102deg, var(--color-gold) 0%, var(--color-rune) 55%, var(--color-tide) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-gold);
 }
 
 .ink-shadow {
-  text-shadow: 0 2px 24px hsl(var(--shadow-color) / 0.5);
+  text-shadow: 0 2px 0 rgba(255, 250, 240, 0.72);
 }
 
 .ring-focus:focus-visible {
@@ -151,7 +125,7 @@ input, textarea, select {
 .scrollbar-thin::-webkit-scrollbar { width: 7px; height: 7px; }
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: var(--line-strong);
-  border-radius: 999px;
+  border-radius: 2px;
 }
 .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
 
@@ -175,6 +149,57 @@ input, textarea, select {
 /* a hairline that glows with a colour, handy for elemental accents */
 .hairline-glow {
   box-shadow: inset 0 1px 0 0 color-mix(in srgb, currentColor 40%, transparent);
+}
+
+/* Shared journal vocabulary keeps every page in the same world. */
+.journal-rule {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.paper-cut {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--color-rune) 16%, transparent);
+}
+
+.paper-cut::before {
+  position: absolute;
+  inset: 7px;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 22%, transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.field-frame {
+  border: 1px solid color-mix(in srgb, var(--color-dusk) 58%, transparent);
+  background: var(--color-dusk);
+  box-shadow: 8px 8px 0 color-mix(in srgb, var(--color-gold) 25%, transparent);
+}
+
+.section-kicker {
+  color: var(--color-gold);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.bg-dusk .text-parch,
+.bg-void .text-parch,
+.field-frame .text-parch,
+.bg-dusk.text-parch,
+.bg-void.text-parch,
+.field-frame.text-parch {
+  color: #fffaf0;
+}
+
+.bg-dusk .text-parch-dim,
+.bg-void .text-parch-dim,
+.field-frame .text-parch-dim {
+  color: #e7dcc9;
 }
 
 button,

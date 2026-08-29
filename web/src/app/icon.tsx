@@ -17,9 +17,9 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: 14,
-          background: "#14121f",
-          border: "2px solid #3a3455",
+          borderRadius: 6,
+          background: "#30463c",
+          border: "2px solid #d37d4e",
           position: "relative",
         }}
       >
@@ -30,12 +30,12 @@ export default function Icon() {
             width: 8,
             height: 8,
             borderRadius: 999,
-            background: "#ffd07a",
+            background: "#f3c16c",
           }}
         />
         <div
           style={{
-            color: "#ffb638",
+            color: "#fffaf0",
             fontSize: 40,
             fontWeight: 900,
             lineHeight: 1,
@@ -51,7 +51,7 @@ export default function Icon() {
             width: 34,
             height: 3,
             borderRadius: 999,
-            background: "#38a8ff",
+            background: "#d37d4e",
           }}
         />
       </div>

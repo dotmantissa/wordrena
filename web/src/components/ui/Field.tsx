@@ -6,7 +6,7 @@ import type {
 import clsx from "clsx";
 
 const controlClass =
-  "ring-focus w-full rounded-md border border-line-strong bg-dusk px-3 py-2.5 text-sm text-parch placeholder:text-ink-faint hover:border-white/25";
+  "ring-focus w-full border border-line-strong bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-faint hover:border-gold/60";
 
 export function FieldLabel({
   label,

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import {
-  ArrowRight,
+  ArrowUpRight,
   BookOpen,
   BrainCircuit,
   CloudSun,
+  Feather,
   Swords,
 } from "lucide-react";
 import { BiomeScene } from "@/components/game/BiomeScene";
@@ -44,187 +45,190 @@ export default async function Home() {
 
   return (
     <main>
-      <section className="relative overflow-hidden border-b border-line">
-        <div className="arena-grid pointer-events-none absolute inset-0" />
-        <div className="relative mx-auto grid max-w-[1480px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:py-16">
+      <section className="border-b border-line">
+        <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14 lg:py-16">
           <div className="max-w-xl">
-            <Badge className="border-gold/30 text-gold">
-              Natural language creature battler
-            </Badge>
-            <h1 className="mt-5 font-display text-5xl font-bold leading-none text-parch sm:text-6xl">
+            <p className="section-kicker">The living creature league</p>
+            <h1 className="mt-4 max-w-md font-display text-6xl leading-[0.94] text-dusk sm:text-7xl">
               Wordrena
             </h1>
-            <p className="mt-5 max-w-lg text-lg leading-8 text-ink-soft">
-              Write the move you wish existed. GenLayer turns your words into
-              fair numbers. Then your creature has to live with what you wrote.
+            <p className="mt-6 max-w-lg text-lg leading-8 text-ink-soft">
+              Write the move you wish existed. GenLayer gives your sentence
+              numbers, limits, and a fair chance to surprise somebody.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/forge"
-                className="ring-focus inline-flex min-h-11 items-center gap-2 rounded-md border border-gold bg-gold px-5 py-2.5 text-sm font-bold text-void hover:bg-gold-soft"
+                className="ring-focus inline-flex min-h-11 items-center gap-2 border border-dusk bg-dusk px-5 py-2.5 text-sm font-bold text-parch hover:bg-dusk-raise"
               >
-                Enter the forge
-                <ArrowRight className="size-4" />
+                Open the forge
+                <ArrowUpRight className="size-4" />
               </Link>
               <Link
                 href="/how-to-play"
-                className="ring-focus inline-flex min-h-11 items-center gap-2 rounded-md border border-line-strong bg-surface px-5 py-2.5 text-sm font-semibold text-parch hover:border-gold/40"
+                className="ring-focus inline-flex min-h-11 items-center gap-2 border border-line-strong bg-surface px-5 py-2.5 text-sm font-semibold text-ink hover:border-gold"
               >
                 <BookOpen className="size-4" />
-                Learn the ropes
+                Start here
               </Link>
             </div>
-            <p className="mt-5 font-mono text-[11px] uppercase text-ink-faint">
-              Contracts live on chain {contracts.chainId}
-            </p>
+            <div className="mt-8 flex items-center gap-3 text-xs text-ink-faint">
+              <span className="size-2 rounded-full bg-gale" />
+              Live contract record on chain {contracts.chainId}
+            </div>
           </div>
 
-          {biome ? (
-            <BiomeScene
-              name={biome.name}
-              homeElement={biome.home_element}
-              conditions={biome.conditions}
-              buffPct={biome.buff_pct}
-              hazard={biome.hazard}
-              source={biome.source}
-              className="min-h-[390px]"
-            >
-              <div className="grid grid-cols-2 items-end gap-5 px-6 sm:px-12">
-                {attacker ? (
-                  <CreatureArt
-                    name={attacker.name}
-                    element={attacker.element}
-                    active
-                    className="mx-auto h-40 max-w-52"
-                  />
-                ) : null}
-                {defender ? (
-                  <CreatureArt
-                    name={defender.name}
-                    element={defender.element}
-                    facing="left"
-                    className="mx-auto h-40 max-w-52"
-                  />
-                ) : null}
-              </div>
-            </BiomeScene>
-          ) : (
-            <div className="grid min-h-[390px] place-items-center rounded-lg border border-line bg-surface">
-              <p className="max-w-sm px-6 text-center text-ink-soft">
-                The arena is quiet. That is usually when someone writes
-                something regrettable.
-              </p>
+          <div className="relative">
+            <div className="absolute -left-3 -top-3 z-10 hidden border border-dusk bg-bg px-3 py-2 text-[10px] uppercase tracking-[0.08em] text-dusk sm:block">
+              Field note 001
             </div>
-          )}
+            {biome ? (
+              <BiomeScene
+                name={biome.name}
+                homeElement={biome.home_element}
+                conditions={biome.conditions}
+                buffPct={biome.buff_pct}
+                hazard={biome.hazard}
+                source={biome.source}
+                className="min-h-[390px]"
+              >
+                <div className="grid grid-cols-2 items-end gap-5 px-6 sm:px-12">
+                  {attacker ? (
+                    <CreatureArt
+                      name={attacker.name}
+                      element={attacker.element}
+                      active
+                      className="mx-auto h-40 max-w-52"
+                    />
+                  ) : null}
+                  {defender ? (
+                    <CreatureArt
+                      name={defender.name}
+                      element={defender.element}
+                      facing="left"
+                      className="mx-auto h-40 max-w-52"
+                    />
+                  ) : null}
+                </div>
+              </BiomeScene>
+            ) : (
+              <div className="field-frame grid min-h-[390px] place-items-center p-8 text-center text-parch">
+                <p className="max-w-sm">
+                  The field is quiet. Someone has to write the first move.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
       {error ? (
         <section className="border-b border-ember/20 bg-ember/5">
-          <div className="mx-auto max-w-[1480px] px-4 py-4 text-sm text-ember sm:px-6">
+          <div className="mx-auto max-w-[1280px] px-4 py-4 text-sm text-ember sm:px-6">
             StudioNet could not be read: {error}
           </div>
         </section>
       ) : null}
 
-      <section className="border-b border-line bg-dusk">
-        <div className="mx-auto grid max-w-[1480px] grid-cols-2 px-4 sm:px-6 lg:grid-cols-4">
+      <section className="journal-rule bg-surface">
+        <div className="mx-auto grid max-w-[1280px] grid-cols-2 sm:px-6 lg:grid-cols-4">
           {[
-            ["Creatures", data?.stats.bestiary.creatures ?? 0],
+            ["Creatures catalogued", data?.stats.bestiary.creatures ?? 0],
             ["Moves judged", data?.stats.bestiary.moves ?? 0],
-            ["Battles fought", data?.stats.arena.battles ?? 0],
+            ["Duels recorded", data?.stats.arena.battles ?? 0],
             ["Appeals heard", data?.stats.tribunal.total ?? 0],
-          ].map(([label, value]) => (
+          ].map(([label, value], index) => (
             <div
               key={label}
-              className="border-b border-line px-3 py-6 even:border-l sm:px-6 lg:border-b-0 lg:border-l lg:first:border-l-0"
+              className={`px-4 py-6 sm:px-6 lg:py-7 ${
+                index > 0 ? "border-l border-line" : ""
+              }`}
             >
-              <p className="font-display text-3xl font-bold text-parch">{value}</p>
+              <p className="font-display text-3xl text-dusk">{value}</p>
               <p className="mt-1 text-xs text-ink-faint">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1480px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="mx-auto grid max-w-[1280px] gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.12fr_0.88fr] lg:py-18">
         <div>
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="font-mono text-[11px] uppercase text-gold">
-                Arena record
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-bold text-parch">
-                Latest fight
+              <p className="section-kicker">From the battle ledger</p>
+              <h2 className="mt-2 font-display text-3xl text-dusk">
+                The latest duel
               </h2>
             </div>
             <Link
               href="/arena"
-              className="text-sm font-semibold text-ink-soft hover:text-gold"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-ink-soft hover:text-gold"
             >
-              See every fight
+              Open arena
+              <ArrowUpRight className="size-4" />
             </Link>
           </div>
 
           {latestBattle ? (
             <Link
               href={`/arena/${latestBattle.battle_id}`}
-              className="card card-hover mt-5 block p-5"
+              className="paper-cut card-hover mt-6 block p-6"
             >
-              <div className="flex flex-wrap items-center gap-3">
-                <Badge>{latestBattle.battle_id}</Badge>
-                <Badge className="border-tide/30 text-tide">
-                  {titleCase(latestBattle.biome_key)}
-                </Badge>
-                <span className="ml-auto text-xs text-ink-faint">
-                  {formatAgo(latestBattle.created_at)}
-                </span>
-              </div>
-              <div className="mt-5 flex items-center gap-4">
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-display text-xl font-bold text-parch">
-                    {latestBattle.attacker_name}
-                  </p>
-                  <p className="mt-1 text-xs text-ink-faint">Challenger</p>
+              <div className="relative z-10">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge>{latestBattle.battle_id}</Badge>
+                  <Badge className="border-tide/30 text-tide">
+                    {titleCase(latestBattle.biome_key)}
+                  </Badge>
+                  <span className="ml-auto text-xs text-ink-faint">
+                    {formatAgo(latestBattle.created_at)}
+                  </span>
                 </div>
-                <Swords className="size-6 shrink-0 text-gold" />
-                <div className="min-w-0 flex-1 text-right">
-                  <p className="truncate font-display text-xl font-bold text-parch">
-                    {latestBattle.defender_name}
-                  </p>
-                  <p className="mt-1 text-xs text-ink-faint">Defender</p>
+                <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+                  <div>
+                    <p className="font-display text-2xl text-dusk">
+                      {latestBattle.attacker_name}
+                    </p>
+                    <p className="mt-1 text-xs text-ink-faint">Challenger</p>
+                  </div>
+                  <Swords className="size-6 text-gold" />
+                  <div className="text-right">
+                    <p className="font-display text-2xl text-dusk">
+                      {latestBattle.defender_name}
+                    </p>
+                    <p className="mt-1 text-xs text-ink-faint">Defender</p>
+                  </div>
                 </div>
+                <p className="mt-7 border-t border-line pt-4 text-sm leading-6 text-ink-soft">
+                  {latestBattle.summary}
+                </p>
               </div>
-              <p className="mt-5 border-t border-line pt-4 text-sm leading-6 text-ink-soft">
-                {latestBattle.summary}
-              </p>
             </Link>
           ) : (
-            <div className="card mt-5 p-6 text-sm text-ink-soft">
-              No fights yet. The first challenger gets an audience with very low
-              expectations.
+            <div className="paper-cut mt-6 p-6 text-sm text-ink-soft">
+              No fights yet. The first challenger gets an audience and very
+              little useful advice.
             </div>
           )}
         </div>
 
         <div>
-          <p className="font-mono text-[11px] uppercase text-rune">
-            Fresh from consensus
-          </p>
-          <h2 className="mt-2 font-display text-2xl font-bold text-parch">
-            Newly judged moves
+          <p className="section-kicker">Fresh from consensus</p>
+          <h2 className="mt-2 font-display text-3xl text-dusk">
+            New move notes
           </h2>
-          <div className="mt-5 grid gap-3">
+          <div className="mt-6 grid gap-3">
             {data?.moves.slice(-4).reverse().map((move) => (
               <Link
                 href={`/bestiary/moves/${move.move_id}`}
                 key={move.move_id}
                 className="card card-hover grid grid-cols-[auto_1fr_auto] items-center gap-4 p-4"
               >
-                <div className="grid size-10 place-items-center rounded-md bg-rune/10 text-rune">
+                <div className="grid size-10 place-items-center border border-rune/25 bg-rune/10 text-rune">
                   <BrainCircuit className="size-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-parch">
+                  <p className="truncate text-sm font-semibold text-dusk">
                     {move.name}
                   </p>
                   <p className="mt-1 truncate text-xs text-ink-faint">
@@ -248,31 +252,29 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-surface">
-        <div className="mx-auto grid max-w-[1480px] gap-6 px-4 py-10 sm:px-6 lg:grid-cols-3">
+      <section className="border-y border-line bg-dusk text-parch">
+        <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3">
           {[
             {
-              icon: BrainCircuit,
-              title: "Words become rules",
-              body: "Describe the move. Validators decide its damage, cost, accuracy, status, and appetite for trouble.",
+              icon: Feather,
+              title: "You write the instinct",
+              body: "Describe a move like a trainer, poet, or menace. The words become the starting point.",
             },
             {
               icon: CloudSun,
-              title: "The sky meddles",
-              body: "Each biome reads real weather. A warm day in Phoenix can make Emberpeak especially rude.",
+              title: "The field has a say",
+              body: "Every biome reads live weather and gives its home element a reason to feel smug.",
             },
             {
               icon: Swords,
-              title: "The record stays",
-              body: "Fights resolve on chain, award experience, and leave a replay anyone can inspect.",
+              title: "The record remembers",
+              body: "Battles, experience, verdicts, and appeals stay inspectable on the public record.",
             },
           ].map(({ icon: Icon, title, body }) => (
-            <div key={title} className="border-l border-line pl-5">
-              <Icon className="size-5 text-gold" />
-              <h3 className="mt-4 font-display text-lg font-bold text-parch">
-                {title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-ink-soft">{body}</p>
+            <div key={title} className="border-l border-parch/20 pl-5">
+              <Icon className="size-5 text-gold-soft" />
+              <h3 className="mt-4 font-display text-xl">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-parch-dim">{body}</p>
             </div>
           ))}
         </div>

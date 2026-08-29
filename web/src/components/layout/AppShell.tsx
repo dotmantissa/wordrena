@@ -44,10 +44,10 @@ function NavLink({
       href={href}
       onClick={onClick}
       className={clsx(
-        "ring-focus flex min-h-10 items-center gap-2 rounded-md px-3 text-sm font-medium",
+        "ring-focus flex min-h-10 items-center gap-2 border-b-2 px-2 text-sm font-semibold",
         active
-          ? "bg-gold/10 text-gold-soft"
-          : "text-ink-soft hover:bg-surface-2 hover:text-parch"
+          ? "border-gold text-gold"
+          : "border-transparent text-ink-soft hover:border-line-strong hover:text-ink"
       )}
     >
       <Icon className="size-4" strokeWidth={active ? 2.4 : 1.8} />
@@ -63,13 +63,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-bg">
-      <header className="sticky top-0 z-50 border-b border-line bg-dusk/95 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-[1480px] items-center gap-4 px-4 sm:px-6">
-          <Link href="/" className="ring-focus shrink-0 rounded-md">
-            <Logo animated markClass="size-9" textClass="text-lg" />
+      <header className="sticky top-0 z-50 border-b border-line bg-bg/95 backdrop-blur">
+        <div className="mx-auto flex min-h-[76px] max-w-[1280px] items-center gap-5 px-4 sm:px-6">
+          <Link href="/" className="ring-focus shrink-0">
+            <Logo animated markClass="size-10" textClass="text-xl" />
           </Link>
 
-          <nav className="ml-3 hidden flex-1 items-center gap-1 xl:flex">
+          <div className="hidden border-l border-line pl-5 text-xs leading-5 text-ink-faint lg:block">
+            <span className="block font-semibold text-ink">Creature league</span>
+            <span>Field notes from StudioNet</span>
+          </div>
+
+          <nav className="ml-3 hidden flex-1 items-center justify-center gap-5 xl:flex">
             {links.map((item) => (
               <NavLink key={item.href} {...item} />
             ))}
@@ -79,7 +84,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             {user ? (
               <Link
                 href="/roster"
-                className="hidden rounded-md border border-line bg-surface px-3 py-2 font-mono text-[11px] text-ink-soft hover:border-line-strong hover:text-parch sm:block"
+                className="hidden border border-line bg-surface px-3 py-2 font-mono text-[11px] text-ink-soft hover:border-line-strong hover:text-ink sm:block"
               >
                 {shortAddress(user.wallet)}
               </Link>
@@ -90,7 +95,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}
-              className="ring-focus grid size-10 place-items-center rounded-md border border-line text-ink-soft hover:bg-surface-2 hover:text-parch xl:hidden"
+              className="ring-focus grid size-10 place-items-center border border-line text-ink-soft hover:bg-surface-2 hover:text-ink xl:hidden"
               aria-label={open ? "Close navigation" : "Open navigation"}
               aria-expanded={open}
             >
@@ -105,9 +110,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden border-t border-line bg-dusk xl:hidden"
+              className="overflow-hidden border-t border-line bg-surface xl:hidden"
             >
-              <div className="mx-auto grid max-w-[1480px] gap-1 px-4 py-4 sm:grid-cols-2 sm:px-6">
+              <div className="mx-auto grid max-w-[1280px] gap-1 px-4 py-4 sm:grid-cols-2 sm:px-6">
                 {links.map((item) => (
                   <NavLink
                     key={item.href}
@@ -133,9 +138,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </motion.div>
 
-      <footer className="border-t border-line px-4 py-8 text-center text-xs text-ink-faint">
-        Every creature, move, fight, and appeal above is read from GenLayer
-        StudioNet.
+      <footer className="border-t border-line px-4 py-10 text-center text-xs text-ink-faint">
+        Wordrena keeps the field notes public. Creatures, moves, fights, and
+        appeals come from GenLayer StudioNet.
       </footer>
     </div>
   );
