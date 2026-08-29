@@ -151,10 +151,9 @@ export async function createTransactionRecord({
 }) {
   await ensureSchema();
   const id = randomUUID();
-  const jsonArgs = JSON.parse(
-    JSON.stringify(args, (_, value) =>
-      typeof value === "bigint" ? value.toString() : value
-    )
+  const jsonArgs = JSON.stringify(
+    args,
+    (_, value) => (typeof value === "bigint" ? value.toString() : value)
   );
   const result = await pool().query(
     `

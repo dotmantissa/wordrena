@@ -64,23 +64,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-bg">
       <header className="sticky top-0 z-50 border-b border-line bg-bg/95 backdrop-blur">
-        <div className="mx-auto flex min-h-[76px] max-w-[1280px] items-center gap-5 px-4 sm:px-6">
+        <div className="mx-auto grid min-h-[76px] max-w-[1280px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6 lg:gap-7">
           <Link href="/" className="ring-focus shrink-0">
             <Logo animated markClass="size-10" textClass="text-xl" />
           </Link>
 
-          <div className="hidden border-l border-line pl-5 text-xs leading-5 text-ink-faint lg:block">
-            <span className="block font-semibold text-ink">Creature league</span>
-            <span>Field notes from StudioNet</span>
-          </div>
-
-          <nav className="ml-3 hidden flex-1 items-center justify-center gap-5 xl:flex">
+          <nav className="hidden min-w-0 items-center justify-self-center gap-1 xl:flex">
             {links.map((item) => (
               <NavLink key={item.href} {...item} />
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2">
+          <div className="flex shrink-0 items-center justify-self-end gap-2">
             {user ? (
               <Link
                 href="/roster"
