@@ -8,6 +8,7 @@
     "lint:contracts": "for f in contracts/*.py; do .venv/bin/genvm-lint check \"$f\" || exit 1; done",
     "test": ".venv/bin/pytest tests/direct -q",
     "deploy:studionet": "node deploy/deploy.mjs",
+    "repair:studionet": "node deploy/repair-production.mjs",
     "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
